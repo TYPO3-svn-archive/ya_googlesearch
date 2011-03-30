@@ -55,7 +55,7 @@ class tx_yagooglesearch_pi1 extends tslib_pibase
 		$this->pi_USER_INT_obj=1;
 		
 		# define picturePath
-		$this->picturePath    = t3lib_extMgm::extRelPath($this->extKey).'images/';
+		$this->picturePath = $this->conf['picturePath'] ? $this->conf['picturePath'].'/' : t3lib_extMgm::extRelPath($this->extKey).'images/';
 
 		// get the template
 		$templateFile = $this->conf['templateFile'] ? $this->conf['templateFile'] : 'EXT:'.$this->extKey.'/templates/template.html'; 
