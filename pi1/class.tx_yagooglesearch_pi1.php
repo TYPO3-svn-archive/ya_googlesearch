@@ -133,7 +133,7 @@ class tx_yagooglesearch_pi1 extends tslib_pibase
 				$resultInfo = $this->pi_getLL('results').' <b>'.($pageIndex+1).' - '.(($nrPages > 1) ? ($pageIndex+8) : count($resultArr)).'</b>';
 				$resultInfo .= ($estCount > 8) ? ' '.$this->pi_getLL('of_approx').' <b>'.$estCount.'</b>' : '';
 				$searchResults['###RESULTINFO###'] = $this->wrapInHtmlTag($resultInfo,'resultInfo');
-				$searchResults['###BRANDING###'] = $this->wrapInHtmlTag('[ powered by '.$this->cObj->typolink('<img src="'.$this->picturePath.'google.png" align="top" title="Google" alt="Google">',array('parameter' => 'www.google.com', 'extTarget' => '_blank')).']','branding');
+				$searchResults['###BRANDING###'] = $this->wrapInHtmlTag('[ powered by '.$this->cObj->typolink('<img src="'.$this->picturePath.'google.png" align="top" title="Google" alt="Google" />',array('parameter' => 'www.google.com', 'extTarget' => '_blank')).']','branding');
 
 				// create pagebrowser
 				if ($nrPages > 1)
@@ -215,9 +215,9 @@ class tx_yagooglesearch_pi1 extends tslib_pibase
 			}
 		// add forward / backward links
 		if ($currPageIndex != 0) 
-			$pageLinks = $this->pi_linkTP_keepPIvars('<img src="'.$this->picturePath.'backward.png" align="top" title="'.$this->pi_getLL('backward').'" alt="['.$this->pi_getLL('backward').']">',array('search' => $this->piVars['search'], 'start' => $pages[$pageNr-1]->start),0,1).$pageLinks;
+			$pageLinks = $this->pi_linkTP_keepPIvars('<img src="'.$this->picturePath.'backward.png" align="top" title="'.$this->pi_getLL('backward').'" alt="['.$this->pi_getLL('backward').']" />',array('search' => $this->piVars['search'], 'start' => $pages[$pageNr-1]->start),0,1).$pageLinks;
 		if ($nrPages > 1 && $pageNr < $nrPages-1)
-			$pageLinks = $pageLinks.$this->pi_linkTP_keepPIvars('<img src="'.$this->picturePath.'forward.png" align="top" title="'.$this->pi_getLL('forward').'" alt="['.$this->pi_getLL('forward').']">',array('search' => $this->piVars['search'], 'start' => $pages[$pageNr+1]->start),0,1);
+			$pageLinks = $pageLinks.$this->pi_linkTP_keepPIvars('<img src="'.$this->picturePath.'forward.png" align="top" title="'.$this->pi_getLL('forward').'" alt="['.$this->pi_getLL('forward').']" />',array('search' => $this->piVars['search'], 'start' => $pages[$pageNr+1]->start),0,1);
 		return $this->wrapInHtmlTag($pageLinks,'pageLinks');
 		}
 
