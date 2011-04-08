@@ -116,8 +116,14 @@ class tx_yagooglesearch_pi1 extends tslib_pibase
 			// now, process the JSON string
 			$json = json_decode($result);
 
+			// some vars for better handling
 			$resultArr = $json->responseData->results;
-			$pageArr = $json->cursor->pages;
+			$pageArr = $json->responseData->cursor->pages;
+			$nrPages = count($pageArr);
+			$estCount = $json->responseData->cursor->estimatedResultCount;
+	
+			// set 'real'pageIndex
+			$pageIndex = $json->responseData->cursor->currentPageIndex*8;
 
 			if ($resultArr)
 				{
@@ -125,12 +131,7 @@ class tx_yagooglesearch_pi1 extends tslib_pibase
 				$tmplSearchResult = $this->cObj->getSubpart($this->template,'###SEARCHRESULT###');
 				$tmplResultList = $this->cObj->getSubpart($this->template,'###RESULTLIST###');
 
-				// some vars for better handling
-				$pages = $json->responseData->cursor->pages;
-				$estCount = $json->responseData->cursor->estimatedResultCount;
-				$nrPages = count($pages);
-		
-				$resultInfo = $this->pi_getLL('results').' <b>'.($pageIndex+1).' - '.(($nrPages > 1) ? ($pageIndex+8) : count($resultArr)).'</b>';
+				$resultInfo = $this->pi_getLL('results').' <b>'.($pageIndex+1).' - '.(($nrPages > 1) ? ($pageIndex+8 > $estCount ? $estCount : $pageIndex+8) : count($resultArr)).'</b>';
 				$resultInfo .= ($estCount > 8) ? ' '.$this->pi_getLL('of_approx').' <b>'.$estCount.'</b>' : '';
 				$searchResults['###RESULTINFO###'] = $this->wrapInHtmlTag($resultInfo,'resultInfo');
 				$searchResults['###BRANDING###'] = $this->wrapInHtmlTag('[ powered by '.$this->cObj->typolink('<img src="'.$this->picturePath.'google.png" align="top" title="Google" alt="Google" />',array('parameter' => 'www.google.com', 'extTarget' => '_blank')).']','branding');
@@ -141,7 +142,7 @@ class tx_yagooglesearch_pi1 extends tslib_pibase
 					// use pagebrowse plugin if possible
 					$searchResults['###PAGEBROWSER###'] = t3lib_extMgm::isLoaded('pagebrowse') ?
 					$this->getPagebrowsePluginObj($nrPages,array($this->prefixId => array('search' => $this->piVars['search']),'no_cache' => 1)) :
-					$this->getDefaultPagebrowseObj($nrPages,$pages,$pageIndex);
+					$this->getDefaultPagebrowseObj($nrPages,$pageArr,$pageIndex);
 					} else $searchResults['###PAGEBROWSER###'] = '';
 
 				// display results	
