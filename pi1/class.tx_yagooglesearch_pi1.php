@@ -95,7 +95,7 @@ class tx_yagooglesearch_pi1 extends tslib_pibase
 		$contentArray = array();
 		$contentArray['###PI_BASE###'] = $this->prefixId;
 		$contentArray['###ACTION_URL###'] = $this->pi_getPageLink($GLOBALS['TSFE']->id);
-		$contentArray['###SEARCHPHRASE###'] = $this->piVars['search'];
+		$contentArray['###SEARCHPHRASE###'] = htmlspecialchars($this->piVars['search'],ENT_QUOTES); 
 		$contentArray['###SUBMIT###'] = $this->pi_getLL('submit');
 
 		// substitute template
