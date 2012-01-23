@@ -63,7 +63,7 @@ class tx_yagooglesearch_pi2 extends tslib_pibase
 		$this->includeCSS = isset($this->conf['includeCSS']) && (int)$this->conf['includeCSS'] == 0 ? 0 : 1;
 		if ($this->includeCSS)
 			{
-			$cssFile = $this->conf['cssFile'] ? $this->conf['cssFile'] : t3lib_extMgm::extRelPath($this->extKey).'css/default.css';
+			$cssFile = $this->conf['cssFile'] ? $this->conf['cssFile'] : t3lib_extMgm::siteRelPath($this->extKey).'css/default.css';
 			$GLOBALS['TSFE']->additionalHeaderData[$this->extKey] = '<link rel="stylesheet" href="'.$cssFile.'" type="text/css" />';
 			}
 
