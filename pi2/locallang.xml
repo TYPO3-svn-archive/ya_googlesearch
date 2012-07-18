@@ -7,9 +7,11 @@
 	<data type="array">
 		<languageKey index="default" type="array">
 			<label index="submit">Search</label>
+			<label index="searchlabel">search..."</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="submit">Suchen</label>
+			<label index="searchlabel">Suche..."</label>
 		</languageKey>
 	</data>
 </T3locallang>
