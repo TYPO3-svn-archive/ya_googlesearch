@@ -73,6 +73,9 @@ class tx_yagooglesearch_pi1 extends tslib_pibase
 		// should search be restricted to domain ?
 		$this->domainRest = $this->conf['domainRestriction'] ? 'site:'.$this->conf['domainRestriction'] : '';
 
+		// restrict search to terms in URL
+                $this->inURL = $this->conf['inURL'] ? 'inurl:'.$this->conf['inURL'] : '';
+
 		// max length of displayed url
 		$this->maxURLlength = $this->conf['maxURLlength'] ? (int)$this->conf['maxURLlength'] : 60;
 
@@ -168,7 +171,7 @@ class tx_yagooglesearch_pi1 extends tslib_pibase
 
 	private function deriveURL($searchTerm,$index=0)
 		{
-		$query = urlencode(iconv($this->charEncoding,'UTF-8//IGNORE',$searchTerm).' '.$this->domainRest.' -'.$this->prefixId);
+		$query = urlencode(iconv($this->charEncoding,'UTF-8//IGNORE',$searchTerm).' '.$this->domainRest.' '.$this->inURL.' -'.$this->prefixId);
 		return $this->googleBaseURL.'&start='.$index.'&q='.$query;
 		}
 
