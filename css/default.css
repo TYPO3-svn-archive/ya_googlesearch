@@ -21,15 +21,19 @@
 	text-align: center;
 	}
 
+.tx-yagooglesearch-pi1-pageLinks img{
+        width: 16px;
+        height: auto;
+        }
+	
 .tx-yagooglesearch-pi1-branding {
 	font-size: smaller;
 	text-align: center;
 	}
 
-
-.tx-yagooglesearch-pi1 img{
-	height: 14px;
-	}
+.tx-yagooglesearch-pi1-branding img{
+        vertical-align: bottom;
+        }
 
 .tx-yagooglesearch-pi1-noResults {	
 	font-weight: bold;
